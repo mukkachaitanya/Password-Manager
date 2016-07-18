@@ -27,7 +27,7 @@ python manager.py
 
 ## Screenshots
 
-![Main Image](http://imgur.com/Vwfj7va "Main Image")
+![Main Image](http://i.imgur.com/Vwfj7va.png "Main Image")
 
 ## Known Issues
 
