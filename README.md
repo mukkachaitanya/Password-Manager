@@ -25,10 +25,11 @@ Run the `manager.py` to fire up the program.
 python manager.py
 ```
 
-## Known Problems
+## Known Issues
 
 * Search option doesn't work as yet.
 * Initial setting up of password isn't implemented yet. (Password - *G!thuB*)
+* Not tested on Python 3.
 
 ## Authors
 
