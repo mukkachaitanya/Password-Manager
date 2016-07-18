@@ -25,6 +25,10 @@ Run the `manager.py` to fire up the program.
 python manager.py
 ```
 
+## Screenshots
+
+![Main Image](http://imgur.com/a/Y4Rfp "Main Image")
+
 ## Known Issues
 
 * Search option doesn't work as yet.
