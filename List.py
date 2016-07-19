@@ -20,8 +20,16 @@ class ListWindow(Toplevel):
         Toplevel.__init__(self, *args)
         self.title("List Database")
 
-        self.frame = Frame(self, bd=3)
+
+        self.frame = getTreeFrame(self, bd=3)
         self.frame.pack()
+
+
+# Lots of Awesomeness
+class getTreeFrame(Frame):
+
+    def __init__(self, *args, **kwargs):
+        Frame.__init__(self, *args, **kwargs)
         self.addLists()
 
     def addLists(self, *arg):
@@ -30,10 +38,9 @@ class ListWindow(Toplevel):
 
         if dataList:
             # Adding the Treeview
-            Label(self.frame, text="Double Click to copy password", bd=2,
-                  font=LARGE_FONT).pack(side="top")
-            self.tree = ttk.Treeview(
-                self.frame, columns=headings, show="headings")
+            Label(self, text="Double Click to copy password",
+                  bd=2, font=LARGE_FONT).pack(side="top")
+            self.tree = ttk.Treeview(self, columns=headings, show="headings")
             self.tree.pack()
 
             # Adding headings to the columns and resp. cmd's
@@ -75,10 +82,9 @@ class ListWindow(Toplevel):
 
     def errorMsg(self, *args):
         msg = "There is no data yet!"
-        self.title("Error!")
-        label = Label(self.frame, text=msg, font=NORM_FONT, bd=3, width=30)
+        label = Label(self, text=msg, font=NORM_FONT, bd=3, width=30)
         label.pack(side="top", fill="x", pady=10)
-        B1 = ttk.Button(self.frame, text="Okay", command=self.destroy)
+        B1 = ttk.Button(self, text="Okay", command=self.destroy)
         B1.pack(pady=10)
 
     def OnDoubleClick(self, event):
