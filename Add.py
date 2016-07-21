@@ -1,6 +1,6 @@
 try:
     from tkinter import *
-    from Tkinter import ttk
+    from tkinter import ttk
 except ImportError:
     from Tkinter import *
     import ttk

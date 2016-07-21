@@ -31,9 +31,9 @@ python manager.py
 
 ## Known Issues
 
-* Search option doesn't work as yet.
+* ~~Search option doesn't work as yet.~~
 * Initial setting up of password isn't implemented yet. (Password - *G!thuB*)
-* Not tested on Python 3.
+* ~~Not tested on Python 3.~~
 
 ## Authors
 
