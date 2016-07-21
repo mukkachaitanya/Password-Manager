@@ -24,33 +24,32 @@ class SearchWindow(Toplevel):
         # Using Tk 's variable tracing
         # Checkout http://stupidpythonideas.blogspot.in/2013/12/tkinter-validation.html
         self.namevar = StringVar()
-        self.namevar.trace('w', self.onPress)
+        self.namevar.trace('w', self.onUpdate)
         search = ttk.Entry(self.frame, textvariable=self.namevar)
         search.grid(row=0, columnspan=2)
         search.focus_set()
         # Binding a <Return> pressed event
-        search.bind('<Return>', lambda _:  self.onPress(search.get()))
+        search.bind('<Return>', lambda _:  self.self.onUpdate())
 
         s = ttk.Style()
-        s.configure("Submit.TButton", font=BUTTON_FONT, sticky="s")
+        s.configure("Submit.TButton", font=BUTTON_FONT, sticky="e")
 
         searchBtn = ttk.Button(self.frame, text="Search",
                                style="Submit.TButton",
-                               command=lambda:  self.onPress()
+                               command=lambda:  self.onUpdate()
                                )
         searchBtn.grid(row=0, column=3, sticky="e")
+        # Awesomeness here
+        self.tree = List.getTreeFrame(self, bd=3)
+        self.tree.pack()
 
     '''*args = [name, index, mode]
         Returend by the variable tracing'''
-    def onPress(self, *args):
+    def onUpdate(self, *args):
         # Search regex
         content = self.namevar.get()
         searchReg = re.compile(content, re.IGNORECASE)
-        '''self.tree.pack_forget()
-        self.tree.grid_forget()'''
-        # Awesomeness here
-        self.tree = List.getTreeFrame(self, searchReg, bd=3)
-        self.tree.pack()
+        self.tree.updateList(searchReg)
         return True
 
 
