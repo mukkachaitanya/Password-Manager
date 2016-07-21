@@ -9,6 +9,7 @@ import Add
 import hashlib
 import encode
 import List
+import Search
 
 
 LARGE_FONT = ("Verdana", 13)
@@ -81,7 +82,7 @@ class Login(Tk):
         btnList = ["Add", "List", "Search"]
         btnCmdList = [lambda: Add.AddWindow(self),
                       lambda: List.ListWindow(self),
-                      quit]
+                      lambda: Search.SearchWindow(self)]
         f = []  # Frames array
         img = []  # image array
         self.temp = []  # temp array
