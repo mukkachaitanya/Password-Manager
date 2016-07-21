@@ -20,7 +20,6 @@ class ListWindow(Toplevel):
         Toplevel.__init__(self, *args)
         self.title("List Database")
 
-
         self.frame = getTreeFrame(self, bd=3)
         self.frame.pack()
 
@@ -40,8 +39,13 @@ class getTreeFrame(Frame):
             # Adding the Treeview
             Label(self, text="Double Click to copy password",
                   bd=2, font=LARGE_FONT).pack(side="top")
+
+            scroll = ttk.Scrollbar(self, orient=VERTICAL)
             self.tree = ttk.Treeview(self, columns=headings, show="headings")
-            self.tree.pack()
+            scroll.config(command=self.tree.yview)
+
+            scroll.pack(side=RIGHT, fill=Y)
+            self.tree.pack(side=LEFT, fill='both', expand=1)
 
             # Adding headings to the columns and resp. cmd's
             for heading in headings:
@@ -84,7 +88,7 @@ class getTreeFrame(Frame):
         msg = "There is no data yet!"
         label = Label(self, text=msg, font=NORM_FONT, bd=3, width=30)
         label.pack(side="top", fill="x", pady=10)
-        B1 = ttk.Button(self, text="Okay", command=self.destroy)
+        B1 = ttk.Button(self, text="Okay", command=self.master.destroy)
         B1.pack(pady=10)
 
     def OnDoubleClick(self, event):
@@ -95,6 +99,14 @@ class getTreeFrame(Frame):
         var = self.data[service][1]
         var = encode.decode(var)
         pyperclip.copy(var)
+
+    """No *args"""
+    def updateList(self, regStr, *args):
+        for x in self.tree.get_children(''):
+            self.tree.delete(x)
+        for data in self.getData():
+            if re.search(regStr, data[0]) or re.search(regStr, data[1]):
+                self.tree.insert("", "end", values=data)
 
     def sortby(self, tree, col, descending):
         """sort tree contents when a column header is clicked on"""
