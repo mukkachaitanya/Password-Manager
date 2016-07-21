@@ -7,6 +7,7 @@ except ImportError:
 
 import Add
 import hashlib
+import os
 import encode
 import List
 import Search
@@ -21,7 +22,10 @@ class Login(Tk):
 
     def __init__(self, *args):
         Tk.__init__(self, *args)
-        Tk.iconbitmap(self, default='icon.ico')
+
+        '''Needs update'''
+        if os.name == 'nt':
+            Tk.iconbitmap(self, default='icon.ico')
         Tk.wm_title(self, "Password Manager")
         self.state = {
             "text": "Login to access password database.", "val": False}
