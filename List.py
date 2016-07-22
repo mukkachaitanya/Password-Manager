@@ -40,9 +40,10 @@ class getTreeFrame(Frame):
             Label(self, text="Double Click to copy password",
                   bd=2, font=LARGE_FONT).pack(side="top")
 
-            scroll = ttk.Scrollbar(self, orient=VERTICAL)
+            scroll = ttk.Scrollbar(self, orient=VERTICAL, takefocus=True)
             self.tree = ttk.Treeview(self, columns=headings, show="headings")
             scroll.config(command=self.tree.yview)
+            self.tree.configure(yscroll=scroll.set)
 
             scroll.pack(side=RIGHT, fill=Y)
             self.tree.pack(side=LEFT, fill='both', expand=1)
@@ -110,12 +111,11 @@ class getTreeFrame(Frame):
 
     def sortby(self, tree, col, descending):
         """sort tree contents when a column header is clicked on"""
-        # grab values to sort
+        # Grab values to sort
         data = [(tree.set(child, col), child)
                 for child in tree.get_children('')]
-        # if the data to be sorted is numeric change to float
-        # data =  change_numeric(data)
-        # now sort the data in place
+
+        # Sort the data in place
         data.sort(reverse=descending)
         for ix, item in enumerate(data):
             tree.move(item[1], '', ix)
