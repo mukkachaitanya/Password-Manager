@@ -27,16 +27,25 @@ python manager.py
 
 ## Screenshots
 
-![Main Image](http://i.imgur.com/Vwfj7va.png "Main Image")
+![Screenshots](http://i.imgur.com/Vwfj7va.png "Main Image")
 
 ## Known Issues
 
 * ~~Search option doesn't work as yet.~~
-* Initial setting up of password isn't implemented yet. (Password - *G!thuB*)
+* ~~Initial setting up of password isn't implemented yet. (Password - *G!thuB*)~~
 * ~~Not tested on Python 3.~~
+
+You tell.
+
+## Releases
+
+Check [releases](https://github.com/mukkachaitanya/Password-Manager/releases) for Windows .msi files to install. (Prerequisities not required for these to work)
 
 ## Authors
 
 * **Chaitanya Mukka** - *Initial work* - [Chaitanya MUkka](https://github.com/mukkachaitanya)
 
 See also the list of [contributors](https://github.com/mukkachaitanya/Password-Manager/contributors) who participated in this project.
+
+
+##### Coded in Atom :heart: on Windows
