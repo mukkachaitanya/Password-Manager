@@ -28,9 +28,13 @@ class Login(Tk):
             Tk.iconbitmap(self, default='icon.ico')
         Tk.wm_title(self, "Password Manager")
         self.state = {
-            "text": "Login to access password database.", "val": False}
+            "text": "Login to access password database.", "val": False
+        }
 
-        self.addLoginFrame()
+        if encode.password:
+            self.addLoginFrame()
+        else:
+            self.addRegisterFrame()
 
         # Adding frames
 
@@ -48,6 +52,7 @@ class Login(Tk):
         # Bind event for when enter is pressed in the Entry
         entry.bind('<Return>', lambda _: self.checkPwd(
             login, label=loginLabel, entry=entry, btn=submitBtn))
+        entry.focus_set()
 
         s = ttk.Style()
         s.configure("Submit.TButton", font=BUTTON_FONT)
@@ -58,6 +63,7 @@ class Login(Tk):
 
         submitBtn.grid(row=2, column=1, pady=3)
 
+    """Kwargs = loginLabel, password entry, and submit button"""
     def checkPwd(self, frame, **kwargs):
         chk = kwargs['entry'].get()
         # if passwords match
@@ -101,6 +107,50 @@ class Login(Tk):
                        style="Submit.TButton",
                        command=btnCmdList[i]).grid(sticky="NWSE")
 
+    def addRegisterFrame(self, *arg):
+        register = Frame(self, padx=2, pady=2, bd=2)
+        register.pack()
+
+        info = "Register with a password\nTo start using the manager"
+        registerLabel = Label(register, text=info,
+                              bd=10, font=LARGE_FONT, width=30)
+        registerLabel.grid(row=0, columnspan=3)
+
+        entry = ttk.Entry(register, show="*")
+        entry.grid(row=1, column=1, pady=3)
+        entry.focus_set()
+
+        entryChk = ttk.Entry(register, show="*")
+        entryChk.grid(row=2, column=1, pady=3)
+        entryChk.bind('<Return>', lambda _: self.register(register,
+                                                          entry, entryChk))
+
+        s = ttk.Style()
+        s.configure("Submit.TButton", font=BUTTON_FONT)
+        submitBtn = ttk.Button(register, text="Register",
+                               style="Submit.TButton",
+                               command=lambda: self.register(register,
+                                                             entry, entryChk))
+        submitBtn.grid(row=3, column=1, pady=3)
+
+    def register(self, frame, *pwd):
+        # pwd is a list containing password inputs
+        if pwd[0].get() == pwd[1].get():
+            encode.password = hashlib.md5(pwd[0].get()).hexdigest()
+            # Saving password for future use.
+            open(".pwd", "w").write(encode.password)
+
+            frame.destroy()
+            self.addLoginFrame()
+        else:
+            error = "Passwords dont match!!\nTry again."
+            errorLabel = Label(frame, text=error,
+                               bd=10, font=("Verdana", 11), fg="red")
+            errorLabel.grid(row=4, column=1, pady=3)
+
+            # Removing previosly entered Passwords
+            for wid in pwd:
+                wid.delete(0, 'end')
 
 if __name__ == '__main__':
     new = Login()

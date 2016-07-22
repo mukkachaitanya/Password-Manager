@@ -1,17 +1,23 @@
 import base64
 
-password = "f7c199a97f90fe7ca09756ab3fc5b01d"
+# password = "f7c199a97f90fe7ca09756ab3fc5b01d"
+password = None
+try:
+    password = open(".pwd", "r").read()
+except IOError:
+    pass
+
 pwd = "G!thuB"
 
 
 # Source can be found at https://gist.github.com/ilogik/6f9431e4588015ecb194
-
+# A encoding similar to Vigenere cipher
 
 def encode(string, key=pwd):
     encoded_chars = []
     for i in xrange(len(string)):
         key_c = key[i % len(key)]
-        # ord() gives the respwctive ascii value
+        # ord() gives the respective ascii value
         encoded_c = chr(ord(string[i]) + ord(key_c) % 256)
         encoded_chars.append(encoded_c)
     encoded_string = "".join(encoded_chars)
