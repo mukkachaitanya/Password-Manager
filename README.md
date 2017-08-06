@@ -48,4 +48,4 @@ Check [releases](https://github.com/mukkachaitanya/Password-Manager/releases) fo
 See also the list of [contributors](https://github.com/mukkachaitanya/Password-Manager/contributors) who participated in this project.
 
 
-##### Coded in Atom :heart: on Windows
+##### Coded in Atom with :heart: on Windows
